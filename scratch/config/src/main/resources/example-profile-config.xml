@@ -1,0 +1,172 @@
+<profile name="my-enteprise-profile" extends="general-profile">
+
+
+    <!-- Additions and overrides to the defaut profile -->
+
+    <exception-model name="my-exception-model">
+        <abort-exception-model url="sca://myExceptionComposite"/>
+    </exception-model>
+
+    <exception-model name="my-retry-model">
+        <!--
+            Retry 4 times then call the nested model for further action.
+         -->
+        <retry-exception-model attempts="4" require-idempotency="true">
+            <abort-exception-model url="sca://myExceptionComposite"/>
+        </retry-exception-model>
+    </exception-model>
+
+
+    <exception-model name="my-retry-rollback-model">
+        <!--
+            Retry 4 times then call the nested model for further action
+        -->
+        <retry-exception-model attempts="4" require-idempotency="true">
+            <!--
+                Rollback the current transaction then call the nested model.
+             -->
+            <rollback-exception-model url="sca://myExceptionComposite">
+                <abort-exception-model url="sca://myExceptionComposite"/>
+            </rollback-exception-model>
+        </retry-exception-model>
+    </exception-model>
+
+
+    <!--
+    <deployment-model>
+        <custom-replication-strategy url="java:org.me.myReplication"/>
+    </deployment-model> 
+     -->
+    <deployment-model name="scale-out-from-3-5-nodes">
+        <limited-scale min="3" max="5"/>
+        <on-replication url="java:org.me.MyReplicationHook"/>
+        <on-fail url="serr:text:Could not scale out - more physical nodes required?"/>
+    </deployment-model>
+
+    <execution-model name="pipeline">
+        <custom-execution-model url="sca://PipeLineExcecutionModel"/>
+    </execution-model>
+
+
+    <!--In this execution model, each of the components are started
+        in seperate threads but communicate asynchronously via queues.
+         These intermediate queues act to load-balance.
+     -->
+
+    <execution-model name="seda">
+        <queued-execution-model distributed="false">
+            <thread-pool max="100" min="10"/>
+            <queue url="jms://myQyeye"/>
+        </queued-execution-model>
+    </execution-model>
+
+    <!-- In this model, each of the components in the processing group
+         are started in seperate threads. They are then pipelined together,
+         that is, as one produces a message the next starts consuming the message
+         synchronously.
+       -->
+    <execution-model name="distributed-custom">
+        <pipelined-execution-model distributed="true">
+            <pipeline-mediator url="sca://PipelineMediator"/>
+        </pipelined-execution-model>
+    </execution-model>
+
+    <!-- In this execution model, between each invocation the message is
+         placed on a distributed topic so that each piece of work is done
+         on each node. Not sure what scenario would call for this
+    -->
+    <execution-model name="distributed-multicast">
+        <queued-execution-model distributed="true">
+            <topic url="jms://MyTopic"/>
+        </queued-execution-model>
+    </execution-model>
+
+    <!-- This determines how a message gets passed to service processing-unit -->
+    <invocation-model name="my-invoker">
+        <reflective-invocaton-model enrichment="true" payload="true"/>
+    </invocation-model>
+
+    <!-- The provisioning model determines how a copy of a service is obtained
+         prior to invocation. The provisioning model is passed the URL of the
+         service and is requested to return back an instance.
+     -->
+    <provisioning-model name="my-pool">
+        <instance-pool-model url="java:org.me.MyPool" lazy="false"/>
+    </provisioning-model>
+
+    <!--
+        The message model determines what actually implements the Message interface.
+        With the auditable message model features that can be switched on
+        include which events should be recorded what is kept in the history as well
+        as how copies of states are kept if any (useful for debugging). Event
+        listeners can be added to record state changes to a URL.
+     -->
+    <message-model name="highly-auditable">
+        <auditable-message-model>
+            <track-events>all</track-events>
+            <history-model history="all">
+                <state-recording-strategy url="ref:XStreamStateRecorder"/>
+            </history-model>
+            <message-event-listeners>
+                <message-event-listener url="java:org.me.EventListener"/>
+            </message-event-listeners>
+        </auditable-message-model>
+    </message-model>
+
+    <!-- Of course it's possible to keep it simple by having a message that
+         cuts through all the complexity and doesn't record any history or
+         support listeners etc.
+     -->
+    <message-model name="lightweight">
+        <lightweight-message-model/>
+    </message-model>
+
+    <!--
+        The data model is used for any data handling that occurs, this includes
+        converting from one type to another. The data model basically determines
+        the canonical type for a procesing group.
+     -->
+    <data-model name="fast-xml">
+        <xml-pull>
+            <type-converter url="java:org.me.MyTypeConverter"/>
+            <object-model url="java:org.me.MyTransportableObjectFactory"/>
+        </xml-pull>
+    </data-model>
+
+    <data-model name="map">
+        <map type="fast-hash-map"/>
+    </data-model>
+
+    <profile-defaults>
+        <default-exception-model ref="my-retry-rollback-model" override="false"/>
+        <default-execution-model ref="seda"/>
+        <default-invocation-model ref="my-invoker"/>
+        <defalt-provisioning-model ref="my-pool"/>
+        <default-deployment-model ref="scale"/>
+        <default-message-model ref="lightweight"/>
+    </profile-defaults>
+
+
+    <!--
+         Switching the aspect of the profile allows you to change what the default
+         features are or temporarily override definitions. An aspect is not specified
+         by the configuration but is specified at deploy by the systems runtime.
+         Example aspects might be debug,local,test. Multiple aspects may be applied
+         by the runtime the ordering is down to the runtime.
+         -->
+    <profile-aspect aspect="debug">
+
+        <execution-model name="seda">
+            <queued-execution-model distributed="false">
+                <thread-pool max="100" min="10"/>
+                <queue url="java:org.me.myDebugQueue"/>
+            </queued-execution-model>
+        </execution-model>
+
+        <profile-defaults>
+            <default-message-model ref="highly-auditable"/>
+        </profile-defaults>
+
+    </profile-aspect>
+
+</profile>

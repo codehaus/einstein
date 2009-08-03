@@ -1,0 +1,391 @@
+<module>
+
+    <profile>
+        <!-- The profile to use unless another is specified on a group -->
+
+        <default-profile name="general-profile"/>
+
+        <!-- Additions and overrides to the defaut profile -->
+
+        <exception-model name="my-exception-model">
+            <on-fail url="sca://myExceptionComposite"/>
+        </exception-model>
+
+        <!--
+       <deployment-model>
+           <custom-replication-strategy url="java:org.me.myReplication"/>
+       </deployment-model>
+        -->
+        <deployment-model name="scale-out-from-3-5-nodes">
+            <limited-scale min="3" max="5"/>
+            <on-replication url="java:org.me.MyReplicationHook"/>
+            <on-fail url="serr:text:Could not scale out - more physical nodes required?"/>
+        </deployment-model>
+
+    </profile>
+
+    <!--
+        Triggers are used to start a processing group.
+    -->
+
+    <events>
+
+        <!--
+           This starts a listener which will wait for messages and field them
+           straight to the specified group. In this case the nested group.
+        -->
+        <listen url="jms://entryPointForPipeline">
+            <group execution-model="direct" exception-model="abort">
+                <service url="sca://myService2"/>
+                <service url="java://myService3"/>
+                <service url="sca://myService4">
+                    <!--
+                       A stateful service is passed it's state as well as the
+                       incoming message.
+                    -->
+                    <state url="local://service4State"/>
+                </service>
+            </group>
+        </listen>
+
+        <!--
+           This starts a poller which will poll for messages and field them
+           straight to the specified group.
+        -->
+        <poll url="axis:http://myserver.com:8080/MyService" ref="seda-thing"/>
+
+        <!--
+            Call the processing group every ten seconds.
+        -->
+        <time period="10s" ref="main"/>
+
+    </events>
+
+    <!-- If the group is a pipeline each element will be executed
+         in it's own thread and the output of one component will be the input
+         of the next component, just like a Un*x pipeline.
+     -->
+    <!--
+         By using the transacted-pipeline profile we are declaring a combination
+         of defaults including begin-or-join transaction semantics.
+     -->
+    <!--
+        The exception model is used to govern how processing should continue
+        in the event of an exception, this could include a complete retry,
+        abort, compensating actions.
+     -->
+    <group name="main"
+           execution-model="pipeline"
+           profile="transacted-pipeline"
+           exception-model="my-exception-model"
+           deployment-model="scale-out-from-3-5-nodes">
+
+
+        <!-- complex-event-processing support -->
+        <!--<event-set>-->
+        <!--<event-query>-->
+        <!--<url>-->
+        <!--esper:text:select avg(price) from org.me.event.OrderEvent.win:time(30 sec)-->
+        <!--</url>-->
+        <!--</event-query>-->
+        <!--<action url="sca://EventMonitor"/>-->
+        <!--</event-set>-->
+
+        <!-- A service is passed the payload, minus any other state information,
+             if the use flag is set to enriched then both the original payload
+             and any enrichment data will be passed, if the flag is set to
+             complete then the headers will also be passed to the service
+             otherwise just the payload will be passed.
+         -->
+        <service url="sca://myService" use="enriched"/>
+
+        <!-- This repeats while the URL provides a positive response -->
+        <while url="groovy:text:counter &lt; 10">
+
+            <!-- A processor is a general processing component and is allowed to
+                do anything it likes with the message it receives, this is a catch
+                all to allow for any scenarios not supported by core components. It
+                can have any processor element nested within it also.
+            -->
+            <processor url="java:org.me.RawMessageProcessor"/>
+
+            <!-- Wait until a message is received on the URL -->
+            <wait>
+                <get url="time:1000ms"/>
+            </wait>
+
+        </while>
+
+        <!-- A filter decides whether any more processing should be done with
+            this message, it can optionally specify a dead-letter URL for
+            discards to go to.
+        -->
+        <filter url="xpath:///thing/*[thang=1]"/>
+
+
+        <!--
+            This adds data to the inbound message.
+        -->
+        <enrich path="xpath://message/payload/order/line[type=software]/productDetails">
+            <service url="java:org.me.MyService"/>
+        </enrich>
+
+        <enrich path="xpath://message/payload/order/line[type=software]/productDetails"
+                parallel="true">
+            <group>
+                <poll url="axis://myserver.com/myService"/>
+                <transform url="java:org.me.MyService"/>
+                <service url="java:org.me.MyService"/>
+            </group>
+        </enrich>
+
+        <enrich path="xpath://message/payload/order/line[type=software]/productDetails">
+            <transform url="java:org.me.MyService"/>
+        </enrich>
+
+        <wait>
+            <poll url="jdbc:select for update * from LOCK_TABLE"/>
+        </wait>
+
+        <transform url="ref:Object2String"/>
+
+        <!-- An enforcement is used to ensure that a particular criteria is true
+             otherwise it generates an error.
+         -->
+        <enforce url="builtin:InstanceOf?clazz=java.lang.String"/>
+
+        <service url="sca://otherService" use="payload"/>
+
+        <!-- the domain:// transport is the default inter node transport -->
+        <dispatch url="distributed:sedaProcessingEntryPoint1"/>
+
+        <!-- Oh and we send it to the standard output -->
+        <send url="stream://System.out"/>
+
+    </group>
+
+    <!-- With the SEDA execution model all components exist in a seperate thread
+        and are joined by a (non-transactional) queue.
+    -->
+    <group name="seda-thing" execution-model="seda" exception-model="retry">
+
+        <!-- The following should be treated as single action by the execution
+             model. The execution model can determine how to perform an atomic
+             action.
+        -->
+        <atomic>
+            <!-- Since the error model is retry we must declare this service to
+                be idempotent
+            -->
+            <service idempotent="true" url="sca://myService"/>
+            <!-- A dispatch operation accepts a message sends it to the URL and
+               continues processing.
+            -->
+            <dispatch url="javaspaces://something"/>
+
+        </atomic>
+
+        <!--
+            Only one instance with the partition described by the URL may run at once in the
+            specified scope. The execution model is responsible for deciding how the
+            mutex should occur.
+        -->
+        <mutex scope="domain" url="text:MySingletonService">
+
+            <atomic>
+                <service idempotent="true" url="sca://AnotherService"/>
+                <dispatch url="javaspaces://something"/>
+            </atomic>
+
+        </mutex>
+
+        <!--
+            An aggregator stores up messages in groups defined by the partion value.
+            until the release criteria is reached
+            in which case the payloads are joined and then passed to the
+            release elements nested processing units.
+        -->
+        <aggregate>
+
+            <partition url="xpath:///thing/thang"/>
+
+            <!--
+                This is where the aggregates should be stored.
+            -->
+            <store url="dynamic:javaspaces://aggregationStore"/>
+
+            <!--
+                The release URL specifies the query to determine whether it is time to
+                empty the partition within the store.
+
+                Examples of release criteria include the incoming message being a control
+                message or the size of the store exceeding a certain amount.
+
+                If mutex is true then the release criteria negotiates a domain wide lock
+                on the action (see <mutex>) for the partition.
+            -->
+            <release mutex="true" url=" ... calclulate the size of the space ....">
+
+
+                <!--
+                   Map converts a list of data into a map using the supplied
+                   queries to obtain the key and value.
+                -->
+                <map key="groovy:text:message.payload.name" value="builtin:payload"/>
+
+                <!--
+                    A reduction takes a map of data, passes it to an algorithm which then
+                    reduces the size of the map.
+                -->
+                <reduce url="java:org.me.MyReductionAlgorithm">
+                    <!--
+                       The recurse opeartion calls it's parent with the current mesage until
+                       the optional url supplied becomes false a maximum depth can be specifed
+                       (the default is a finite number).
+                    -->
+                    <recurse url="groovy:text:mesage.payload.list.size() < 1"/>
+                    <send>axis:http://myserver.com/myService</send>
+                </reduce>
+
+            </release>
+
+        </aggregate>
+
+
+        <!--
+            A splitter will receive a single message and split according to a query.
+            The newly produced messages will be sent to the nested processing
+            chain one after the other.
+        -->
+        <split url="xpath://thang">
+
+            <!-- A choice is similar to a switch except it allows the quick identificaton
+                 of multiple units to be executed.
+             -->
+            <choose url="groovy:text:payload.thing.name">
+                <!--
+                    The query will be passed all routes as an array and will return
+                    zero or more IDs as a result.
+                 -->
+                <choices>
+                    <dispatch id="albert" url="system://sedaProcessingEntryPoint1"/>
+                    <dispatch id="dave" url="system://sedaProcessingEntryPoint2"/>
+                    <service id="john" url="java://thing"/>
+                    <!--
+                        A switch will evaluate each
+                     -->
+                    <switch id="switch">
+                        <case url="groovy:text:payload.thing  == 1">
+                            <dispatch id="1" url="system://sedaProcessingEntryPoint1"/>
+                        </case>
+                        <case url="groovy:text:payload.thing == 2">
+                            <!--
+                                The parallel processing unit will execute each nested unit
+                                asynchronously. If wait is set to true then it will wait
+                                for completion of all the units in the group. If aggregate
+                                is set to true then the results of each of unit will be
+                                put into a List and used as the message payload.
+                            -->
+                            <parallel wait="true" aggregate="true">
+                                <send url="system://sedaProcessingEntryPoint1"/>
+                                <send url="system://sedaProcessingEntryPoint2"/>
+                                <send url="system://sedaProcessingEntryPoint3"/>
+                            </parallel>
+
+                        </case>
+                    </switch>
+                </choices>
+            </choose>
+        </split>
+
+
+        <conditional url="groovy:text: exceptionState.excetpionList.isEmpty()">
+            <send url="system://sedaProcessingEntryPoint1"/>
+        </conditional>
+
+        <conditional>
+            <url>groovy:text: exceptionState.excetpionList.isEmpty()</url>
+            <send url="system://sedaProcessingEntryPoint1"/>
+        </conditional>
+
+
+        <conditional>
+            <url>groovy:text: exceptionState.excetpionList.isEmpty()</url>
+            <group>
+                <send url="system://sedaProcessingEntryPoint1"/>
+                <send url="system://sedaProcessingEntryPoint2"/>
+                <send url="system://sedaProcessingEntryPoint3"/>
+            </group>
+        </conditional>
+
+        <!--
+            The query specified will be executed before each of the statements
+            contained. If the query returns true then the next statement will
+            be executed and so on.
+        -->
+        <conditional>
+            <url>groovy:text:message.exceptionState.exceptionList.isEmpty</url>
+            <send url="system://sedaProcessingEntryPoint1"/>
+            <send url="system://sedaProcessingEntryPoint2"/>
+            <send url="system://sedaProcessingEntryPoint3"/>
+        </conditional>
+
+
+        <process url="java://org.me.MyRouter">
+            <!--
+                The url will be passed all the nested proccesing
+                units to do with as it wishes.
+            -->
+            <group>
+                <dispatch id="1" url="system://sedaProcessingEntryPoint1"/>
+                <dispatch id="2" url="system://sedaProcessingEntryPoint2"/>
+                <!--
+                    This is a call to another processsing group.
+                 -->
+                <service url="ref:grid-computation"/>
+            </group>
+
+        </process>
+
+
+        <!--
+           Here is a nested processing group
+        -->
+        <group execution-model="direct" exception-model="abort">
+            <service url="sca://myService2"/>
+            <service url="java://myService3"/>
+            <service url="sca://myService4">
+                <!--
+                   A stateful service is passed it's state as well as the
+                   incoming message.
+                -->
+                <state url="local://service4State"/>
+            </service>
+        </group>
+
+        <send>
+            <balanced load-balance-model="by-server-load">
+                <url>axis:http://server1.com/myService</url>
+                <url>axis:http://server1.com/myService</url>
+                <url>axis:http://server1.com/myService</url>
+            </balanced>
+        </send>
+
+        <dispatch url="domain://directProcessing"/>
+
+    </group>
+
+    <!--
+         The distributed execution model means that the output of one component
+        is passed to the next component but the instance of the next component
+         may not be held locally but on any node available.
+    -->
+    <group name="grid-computation" execution-model="distributed" exception-model="abort">
+        <service url="sca://gridStage1"/>
+        <service url="sca://gridStage2"/>
+        <service url="sca://gridStage3"/>
+        <store url="javaspace://ThingStore"/>
+    </group>
+
+
+</module>

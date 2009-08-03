@@ -1,0 +1,39 @@
+#!/bin/sh
+
+if [ -f /etc/einsteinrc ] ; then
+  . /etc/einsteinrc
+fi
+
+if [ -f "$HOME/.einsteinrc" ] ; then
+  . "$HOME/.einsteinrc"
+fi
+
+
+## resolve links - $0 may be a link to application
+PRG="$0"
+
+# need this for relative symlinks
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG="`dirname "$PRG"`/$link"
+  fi
+done
+
+# make it fully qualified
+saveddir=`pwd`
+EINSTEIN_HOME=`dirname "$PRG"`/..
+EINSTEIN_HOME=`cd "$EINSTEIN_HOME" && pwd`
+cd "$saveddir"
+
+#echo "Einstein is installed in $EINSTEIN_HOME"
+
+MAINCLASS=org.cauldron.einstein.ri.EinsteinCompiler
+EXEC="java -cp $EINSTEIN_HOME -cp $EINSTEIN_HOME/lib/einstein-reference-implementation-compiler-${project.version}-jar-with-dependencies.jar $MAINCLASS $@"
+
+#echo $EXEC
+exec $EXEC
+

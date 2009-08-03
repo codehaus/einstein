@@ -1,0 +1,194 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cauldron.einstein.ri.examples</groupId>
+    <artifactId>einstein-reference-implementation-examples</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+    <name>Einstein reference implementation examples.</name>
+
+    <parent>
+        <groupId>org.cauldron.einstein.ri</groupId>
+        <artifactId>einstein-reference-implementation</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.cauldron.deesel.core</groupId>
+            <artifactId>deesel-core</artifactId>
+            <version>${deesel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.ri.core</groupId>
+            <artifactId>einstein-reference-implementation-core</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.dbc</groupId>
+            <artifactId>einstein-dbc</artifactId>
+            <version>0.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.ri.parser</groupId>
+            <artifactId>einstein-reference-implementation-parser</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.camel</groupId>
+            <artifactId>einstein-camel-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.std</groupId>
+            <artifactId>einstein-std-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.xpath</groupId>
+            <artifactId>einstein-xpath-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.regex</groupId>
+            <artifactId>einstein-regex-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.jgroups</groupId>
+            <artifactId>einstein-jgroups-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.esper</groupId>
+            <artifactId>einstein-esper-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.counter</groupId>
+            <artifactId>einstein-counter-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-mina</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.media</groupId>
+            <artifactId>jai-core</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.media</groupId>
+            <artifactId>jai-codec</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.cauldron.deesel.tool.maven</groupId>
+                <artifactId>deesel-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <!--<execution>-->
+                    <!--<id>testcompile</id>-->
+                    <!--<phase>test-compile</phase>-->
+                    <!--<goals>-->
+                    <!--<goal>testcompile</goal>-->
+                    <!--</goals>-->
+                    <!--</execution>-->
+                </executions>
+
+            </plugin>
+
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>shade</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<artifactSet>-->
+            <!--<excludes>-->
+            <!--<exclude>classworlds:classworlds</exclude>-->
+            <!--<exclude>org.cauldron.einstein.provider:einstein-providers</exclude>  -->
+            <!--<exclude>junit:junit</exclude>-->
+            <!--<exclude>javax.servlet:servlet-api</exclude>-->
+            <!--<exclude>xml-apis:xml-apis</exclude>-->
+            <!--<exclude>commons-logging:commons-logging-api</exclude>-->
+            <!--</excludes>-->
+            <!--</artifactSet>-->
+            <!--<transformers>-->
+            <!--<transformer-->
+            <!--implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />-->
+            <!--</transformers>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <!-- append to the packaging phase. -->
+                        <goals>
+                            <goal>attached</goal>
+                            <!-- goals == mojos -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
+    </build>
+</project>

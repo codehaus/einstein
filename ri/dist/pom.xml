@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cauldron.einstein.ri.dist</groupId>
+    <artifactId>einstein-reference-implementation-distribution</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1</version>
+    <name>Einstein reference implementation distribution.</name>
+
+    <parent>
+        <groupId>org.cauldron.einstein.ri</groupId>
+        <artifactId>einstein-reference-implementation</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <modules>
+	<module>compiler</module>
+	<module>runtime</module>
+    </modules>
+
+    <dependencies>
+            <!-- All the providers should be provided for the compiler and runtime -->
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.camel</groupId>
+            <artifactId>einstein-camel-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.xpath</groupId>
+            <artifactId>einstein-xpath-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.esper</groupId>
+            <artifactId>einstein-esper-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.regex</groupId>
+            <artifactId>einstein-regex-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.counter</groupId>
+            <artifactId>einstein-counter-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.std</groupId>
+            <artifactId>einstein-std-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.provider.jgroups</groupId>
+            <artifactId>einstein-jgroups-provider</artifactId>
+            <version>0.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.media</groupId>
+            <artifactId>jai-core</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <!--<plugin>-->
+                <!--<groupId>org.cauldron.deesel.tool.maven</groupId>-->
+                <!--<artifactId>deesel-maven-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>compile</id>-->
+                        <!--<phase>compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>compile</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                        <!--<id>testcompile</id>-->
+                        <!--<phase>test-compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>testcompile</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+
+            <!--</plugin>-->
+
+
+          
+        </plugins>
+    </build>
+</project>

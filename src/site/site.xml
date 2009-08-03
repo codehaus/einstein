@@ -1,0 +1,16 @@
+<project name="project:Einstein">
+
+    <body>
+
+        <menu name="Home">
+            <item name="Dev Home" href="/index.html"/>
+            <item name="Community Home" href="http://einstein.codecauldron.org/tw/"/>
+            <item name="Intro" href="/pdf/intro.pdf"/>
+            <item name="Presentation Slides" href="/pdf/presentation.pdf"/>
+        </menu>
+        <menu ref="parent"/>
+        <menu ref="modules"/>
+        <menu ref="reports"/>
+
+    </body>
+</project>

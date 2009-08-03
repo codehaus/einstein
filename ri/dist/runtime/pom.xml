@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cauldron.einstein.ri.dist.runtime</groupId>
+    <artifactId>einstein-reference-implementation-runtime</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+    <name>Einstein RI Runtime</name>
+
+    <parent>
+        <groupId>org.cauldron.einstein.ri.dist</groupId>
+        <artifactId>einstein-reference-implementation-distribution</artifactId>
+        <version>0.1</version>
+    </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.cauldron.einstein.ri.core</groupId>
+            <artifactId>einstein-reference-implementation-core</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cauldron.deesel.core</groupId>
+            <artifactId>deesel-core</artifactId>
+            <version>${deesel.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>shade</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<artifactSet>-->
+            <!--<excludes>-->
+            <!--<exclude>classworlds:classworlds</exclude>-->
+            <!--<exclude>junit:junit</exclude>-->
+            <!--<exclude>javax.servlet:servlet-api</exclude>-->
+            <!--<exclude>xml-apis:xml-apis</exclude>-->
+            <!--<exclude>commons-logging:commons-logging-api</exclude>-->
+            <!--</excludes>-->
+            <!--</artifactSet>-->
+            <!--<transformers>-->
+            <!--<transformer-->
+            <!--implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />-->
+            <!--</transformers>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <!-- append to the packaging phase. -->
+                        <goals>
+                            <goal>attached</goal>
+                            <!-- goals == mojos -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

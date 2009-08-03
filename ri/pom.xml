@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cauldron.einstein.ri</groupId>
+    <artifactId>einstein-reference-implementation</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1</version>
+    <name>Reference Implementation.</name>
+    <description>
+        The reference implementation provides a complete example implementation
+        of an Einstein parser, library and runtime.
+    </description>
+
+    <parent>
+        <groupId>org.cauldron.einstein</groupId>
+        <artifactId>einstein</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <modules>
+        <module>scannotation</module>
+        <module>core</module>
+        <module>providers</module>
+        <module>parser</module>
+        <module>tests</module>
+        <module>dist</module>
+        <module>examples</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.cauldron.einstein.dbc</groupId>
+            <artifactId>einstein-dbc</artifactId>
+            <version>0.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.deesel.tool.cli</groupId>
+            <artifactId>deesel-cli</artifactId>
+            <version>${deesel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.common</groupId>
+            <artifactId>einstein-common-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.message</groupId>
+            <artifactId>einstein-message-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.assembly</groupId>
+            <artifactId>einstein-assembly-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.model</groupId>
+            <artifactId>einstein-model-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.runtime</groupId>
+            <artifactId>einstein-runtime-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.provider</groupId>
+            <artifactId>einstein-provider-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.einstein.api.config</groupId>
+            <artifactId>einstein-config-api</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+
+</project>
+
