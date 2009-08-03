@@ -1,0 +1,1 @@
+java -cp einstein-reference-implementation-compiler-0.1-SNAPSHOT.jar org.cauldron.einstein.ri.EinsteinCompiler $@

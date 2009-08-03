@@ -1,0 +1,6 @@
+*.log.*
+*.log
+target
+*.iws
+ajcore*.txt
+tmp

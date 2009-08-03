@@ -1,0 +1,42 @@
+<!--
+    Notice URLs are in use here, so order of loading providers
+    is important as one can be built on another.
+    NB: The java protocol is the bootstrap protocol used to
+    bootstrap the other providers and should be supplied by the runtime.
+-->
+<provider name="myprotocol">
+
+    <!--
+        A model for retrieval queries which return one or zero messages.
+    -->
+    <retrieval-model url="java:org.me.RetrievalFactory"/>
+
+    <!--
+        A model for executables.
+    -->
+    <executable-model url="java:org.me.ExecutableFactory"/>
+
+    <!--
+        A model for queries which return one or more messages.
+     -->
+    <query-model url="java:org.me.QueryFactory"/>
+
+    <!--
+        A model for stores which all the storing of messages.
+    -->
+    <store-model url="java:org.me.StoreFactory"/>
+
+    <!--
+        This allows the runtime to query the status and health
+        of the provider. This is especially useful for load-balancing
+        strategies.
+     -->
+    <status-model url="java:org.me.StatusFactory"/>
+
+    <!--
+          This is really only intended for language level providers like java:
+          it allows the protocol to be used to specify provider factories.
+    -->
+    <provider-model-model url="java:org.me.ProviderFactoryFactory"/>
+
+</provider>

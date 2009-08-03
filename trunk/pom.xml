@@ -1,0 +1,499 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>Project Einstein</name>
+    <groupId>org.cauldron.einstein</groupId>
+    <artifactId>einstein</artifactId>
+    <version>0.1</version>
+    <packaging>pom</packaging>
+    <description>project:Einstein is an open source project aiming to deliver a Domain Specific Langauge for
+        contemporary enterprise development. This includes an SOA based approach with a lightweight, easy to understand
+        configuration mechanism on top of a contemporary stack of entepris  e technologies. What Ant does for builds
+        Einstein will do for application development.
+        We're still in the design phase at the moment, but watch this space.
+    </description>
+
+    <properties>
+        <deesel.version>0.4</deesel.version>
+    </properties>
+
+    <modules>
+        <module>dbc</module>
+        <module>api</module>
+        <module>ri</module>
+        <module>scratch</module>
+    </modules>
+
+    <dependencies>
+        <!-- contract4j5 -->
+        <dependency>
+            <groupId>org.contract4j</groupId>
+            <artifactId>contract4j5</artifactId>
+            <version>0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>bsf</groupId>
+            <artifactId>bsf</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- contract4j5 -->
+        <dependency>
+            <groupId>i18nlog</groupId>
+            <artifactId>i18nlog</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+    </dependencies>
+
+
+    <url>http://einstein.codecauldron.org/maven/</url>
+
+    <organization>
+        <name>Code Cauldron Einstein Project</name>
+        <url>http://einstein.codecauldron.org/</url>
+    </organization>
+
+
+    <developers>
+        <developer>
+            <id>neil</id>
+            <name>Neil Ellis</name>
+            <email>neil.ellis AT mangala.co.uk</email>
+            <url>http://web.mac.com/neilellis</url>
+            <organization>Mangala Solutions Ltd.</organization>
+            <organizationUrl>http://www.mangala.co.uk</organizationUrl>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Richard Nicholson</name>
+            <email>richard.nicholson AT paremus.com</email>
+            <url>http://adaptevolve.blogspot.com/</url>
+            <organization>Paremus</organization>
+            <organizationUrl>http://www.paremus.com</organizationUrl>
+            <roles>
+                <role>Mentor</role>
+            </roles>
+            <timezone>0</timezone>
+        </contributor>
+
+    </contributors>
+
+
+    <scm>
+        <developerConnection>scm:svn:https://svn.codecauldron.org:444/einstein/tags/einstein-0.1</developerConnection>
+        <connection>scm:svn:http://svn.codecauldron.org/einstein/tags/einstein-0.1</connection>
+        <url>http://svn.codecauldron.org/einstein/tags/einstein-0.1</url>
+    </scm>
+
+    <ciManagement>
+        <system>TeamCity</system>
+        <url>http://teamcity.mangala-server.com</url>
+        <notifiers>
+            <notifier>
+                <type>mail</type>
+                <sendOnError>true</sendOnError>
+                <sendOnFailure>true</sendOnFailure>
+                <sendOnSuccess>false</sendOnSuccess>
+                <sendOnWarning>false</sendOnWarning>
+                <configuration>
+                    <address>neil.ellis@mangala.co.uk</address>
+                </configuration>
+            </notifier>
+        </notifiers>
+    </ciManagement>
+
+
+    <reporting>
+        <plugins>
+            <!--NASTY BUG IN JAVADOC THROWS NULL POINTER, SO REMOVED UNTIL FIXED OR WORKAROUND FOUND -->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+
+            <!--<configuration>-->
+            <!--<links>-->
+            <!--<link>http://java.sun.com/j2se/1.5.0/docs/api</link>-->
+            <!--</links>-->
+            <!--<aggregate>true</aggregate>-->
+            <!--</configuration>-->
+
+
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!-- NB: The configuration set here will be overwritten by the groovy script below-->
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-changelog-plugin</artifactId>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>javancss-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+
+                <configuration>
+                    <tags>
+                        <!-- Add the definitions for FIXME javadoc and code comments... -->
+                        <tag>@fixme</tag>
+                        <tag>FIXME</tag>
+                        <tag>@todo</tag>
+                        <tag>TODO</tag>
+                    </tags>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <licenses>
+
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>Core runtime components are Apache 2.0.  The compiler and parser for Einstein ONLY are released under the AGPL license.</comments>
+        </license>
+        <license>
+            <name>GNU Affero General Public License, Version 3.0</name>
+            <url>http://www.gnu.org/licenses/agpl-3.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>The compiler and parser for Einstein ONLY are released under the AGPL license. Core runtime
+                components are Apache 2.0.
+            </comments>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>http://jira.codecauldron.org/browse/EINSTEIN</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>dev list</name>
+            <post>dev@einstein.codecauldron.org</post>
+            <subscribe>dev-subscribe@einstein.codecauldron.org</subscribe>
+            <unsubscribe>dev-unsubscribe@einstein.codecauldron.org</unsubscribe>
+            <archive>http://einstein.codecauldron.org/pipermail/dev/</archive>
+        </mailingList>
+    </mailingLists>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>2.0.6</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>[1.5,1.7)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>aspectj-maven-plugin</artifactId>-->
+
+                <!--<configuration>-->
+                    <!--<source>1.5</source>-->
+                    <!--<complianceLevel>1.5</complianceLevel>-->
+
+                    <!--<aspectLibraries>-->
+                        <!--<aspectLibrary>-->
+                            <!--<groupId>org.contract4j</groupId>-->
+                            <!--<artifactId>contract4j5</artifactId>-->
+                        <!--</aspectLibrary>-->
+                    <!--</aspectLibraries>-->
+                <!--</configuration>-->
+
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>compile</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo.groovy</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                <![CDATA[
+                                import org.codehaus.plexus.util.StringUtils;
+                                import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
+
+                                //My god this is about the nastiest hack ever!!!!
+                                //We reconfigure surefire dynamically.
+                                classpath= StringUtils.join( project.testClasspathElements.iterator(), File.pathSeparator );
+                                project.getReportPlugins().find({it.artifactId == "maven-surefire-plugin"}).configuration=
+                                    Xpp3DomBuilder.build(new java.io.StringReader("""
+                                <configuration>
+                                  <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                                  <systemProperties>
+                                    <property>
+                                      <name>java.class.path</name>
+                                      <value>${classpath}</value>
+                                    </property>
+                                  </systemProperties>
+                                </configuration>
+"""                                ));
+                                //System.err.println(project.getReportPlugins().find({it.artifactId == "maven-surefire-plugin"}).configuration);
+                               ]]>
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <tasks>
+                                <!-- generate the I18N resource bundles -->
+                                <taskdef name="i18n" classpathref="maven.runtime.classpath" classname="mazz.i18n.ant.I18NAntTask" />
+
+                                <i18n outputdir="${project.build.outputDirectory}" defaultlocale="en_US" verbose="false" verify="true">
+                                    <classpath refid="maven.runtime.classpath" />
+                                    <classfileset dir="${project.build.outputDirectory}">
+                                        <include name="**/*.class" />
+                                        <exclude name="**/net/sf/oval/**/*.class" />
+                                    </classfileset>
+                                </i18n>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <excludeModules>einstein-scratch</excludeModules>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-source-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>attach-sources</id>-->
+            <!--<goals>-->
+            <!--<goal>jar</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>attach-javadocs</id>-->
+            <!--<goals>-->
+            <!--<goal>jar</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <distributionManagement>
+        <site>
+            <id>deesel.maven.website</id>
+            <url>scp://mangala-server.com/var/www/vhosts/mangala-server.com/subdomains/deesel/httpdocs/build/maven</url>
+        </site>
+        <repository>
+            <id>mangala.releases</id>
+            <url>dav:http://mangala-server.com:8080/archiva/repository/release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>mangala.snapshots</id>
+            <url>dav:http://mangala-server.com:8080/archiva/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>mangala.releases</id>
+            <name>Archiva Managed Snapshot Repository</name>
+            <url>http://archiva.mangala-server.com/repository/release/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>mangala.snapshots</id>
+            <name>Archiva Managed Snapshot Repository</name>
+            <url>http://archiva.mangala-server.com/repository/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>mangala.thirdparty</id>
+            <name>Mangala Solutions Third Party Repository</name>
+            <url>http://archiva.mangala-server.com/repository/thirdparty</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>anydoby.com</id>
+            <url>http://anydoby.com/maven</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>mangala.releases</id>
+            <name>Archiva Managed Snapshot Repository</name>
+            <url>http://archiva.mangala-server.com/repository/release/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>akathist-repository</id>
+            <name>Akathist Repository</name>
+            <url>http://www.9stmaryrd.com/maven</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>default-tools.jar</id>
+            <activation>
+                <os>
+                    <name>!Mac OS X</name>
+                </os>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <version>1.5.0</version>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+</project>

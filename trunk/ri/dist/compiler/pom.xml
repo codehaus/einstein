@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cauldron.einstein.ri.dist.compiler</groupId>
+    <artifactId>einstein-reference-implementation-compiler</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+    <name>Einstein RI Compiler.</name>
+
+    <parent>
+        <groupId>org.cauldron.einstein.ri.dist</groupId>
+        <artifactId>einstein-reference-implementation-distribution</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.cauldron.deesel.tool.cli</groupId>
+            <artifactId>deesel-cli</artifactId>
+            <version>${deesel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cauldron.deesel.core</groupId>
+            <artifactId>deesel-core</artifactId>
+            <version>${deesel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cauldron.einstein.ri.parser</groupId>
+            <artifactId>einstein-reference-implementation-parser</artifactId>
+            <version>0.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>shade</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<artifactSet>-->
+            <!--<excludes>-->
+            <!--<exclude>classworlds:classworlds</exclude>-->
+            <!--<exclude>junit:junit</exclude>-->
+            <!--<exclude>javax.servlet:servlet-api</exclude>-->
+            <!--<exclude>xml-apis:xml-apis</exclude>-->
+            <!--<exclude>commons-logging:commons-logging-api</exclude>-->
+            <!--</excludes>-->
+            <!--</artifactSet>-->
+            <!--<transformers>-->
+            <!--<transformer-->
+            <!--implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />-->
+            <!--</transformers>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <!-- append to the packaging phase. -->
+                        <goals>
+                            <goal>attached</goal>
+                            <!-- goals == mojos -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+    <licenses>
+        <license>
+            <name>GNU Affero General Public License, Version 3.0</name>
+            <url>http://www.gnu.org/licenses/agpl-3.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>The compiler and parser for Einstein ONLY are released under the AGPL license. Core runtime
+                components
+                are Apache 2.0.
+            </comments>
+        </license>
+    </licenses>
+
+</project>

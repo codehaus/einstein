@@ -1,0 +1,23 @@
+
+Introduction
+
+    <<Make your energy matter with project:Einstein, the language of the enterprise.>>
+
+    project:Einstein is an open source project aiming to deliver a Domain Specific Langauge for contemporary
+    enterprise development. This includes an SOA based approach with a lightweight, easy to understand language
+     on top of a contemporary stack of enteprise technologies.
+
+    All the latest material regarding using Einstein can be found {{{http://einstein.codecauldron.org}here}}.
+
+For More Information
+
+    If this interests you, then take a look at:
+
+        * {{{deesel.codecauldron.org}Deesel}}: The Extensible Language used as the basis for Einstein.
+
+        * {{{newton.codecauldron.org}Newton}}: The intended deployment platform for Einstein.
+
+Join In
+
+    This is mostly a one man show at the moment, if what you see does interest you then drop a line on the dev
+    list: {{{mailto:dev@einstein.codecauldron.org}dev@einstein.codecauldron.org}}.
