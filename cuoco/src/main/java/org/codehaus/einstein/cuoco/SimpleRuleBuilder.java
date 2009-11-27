@@ -192,6 +192,10 @@ public abstract class SimpleRuleBuilder<T> implements RuleFactory, RuleBuilder {
         return string != null && !StringUtils.isEmpty(string.trim());
     }
 
+    public final boolean matches(final String s, final String pattern) {
+        return s != null && s.matches(pattern);
+    }
+
 
     public final boolean isNull(final Object o) {
         return o == null;
@@ -202,7 +206,7 @@ public abstract class SimpleRuleBuilder<T> implements RuleFactory, RuleBuilder {
     }
 
     public final <P> boolean in(final P object, final Collection<P> collection) {
-        return collection.contains(object);
+        return collection != null && collection.contains(object);
     }
 
     public final <P> boolean in(final P object, final P... objects) {
