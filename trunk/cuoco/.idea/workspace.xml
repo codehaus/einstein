@@ -116,7 +116,7 @@
       <file leaf-file-name="SimpleRuleBuilder.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/SimpleRuleBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="66" selection-start="5632" selection-end="5632" vertical-scroll-proportion="0.33170733">
+            <state line="201" column="36" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.62439024">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1017,7 +1017,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/SimpleRuleBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="66" selection-start="5632" selection-end="5632" vertical-scroll-proportion="0.33170733">
+        <state line="201" column="36" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.62439024">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
