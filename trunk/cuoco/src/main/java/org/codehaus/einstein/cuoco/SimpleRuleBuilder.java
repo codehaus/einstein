@@ -27,23 +27,47 @@ public abstract class SimpleRuleBuilder<T> implements RuleFactory, RuleBuilder {
 
     protected abstract void internal(T domain);
 
-    public final Rule createRule(RuleIdentifier ruleIdentifier) {
-        final Rule rule = new Rule(ruleIdentifier);
-        ruleMap.put(ruleIdentifier.getId(), rule);
-        rules.add(rule);
-        return rule;
-    }
+//    public final Rule createRule(RuleIdentifier ruleIdentifier) {
+//        final Rule rule = new Rule(ruleIdentifier);
+//        ruleMap.put(ruleIdentifier.getId(), rule);
+//        rules.add(rule);
+//        return rule;
+//    }
 
     public final Rule createRule(RuleIdentifier ruleIdentifier, Rule rule) {
         final Rule newRule = new Rule(rule, ruleIdentifier);
+        if (failFast) {
+            final RuleResult result = newRule.execute();
+            if (!result.passed()) {
+                throw new FailFastException(result);
+            }
+        }
         ruleMap.put(ruleIdentifier.getId(), newRule);
         rules.add(newRule);
         return newRule;
     }
 
 
-    public final Rule createRule(RuleIdentifier ruleIdentifier, boolean state) {
+    public final Rule createRule(final RuleIdentifier ruleIdentifier, final boolean state) {
         final Rule newRule = new Rule(ruleIdentifier, state);
+        if (failFast) {
+            if (!state) {
+                throw new FailFastException(new RuleResult() {
+
+                    public String getRuleId() {
+                        return ruleIdentifier.getId();
+                    }
+
+                    public String getErrorCode() {
+                        return ruleIdentifier.getErrorCode();
+                    }
+
+                    public boolean passed() {
+                        return state;
+                    }
+                });
+            }
+        }
         ruleMap.put(ruleIdentifier.getId(), newRule);
         rules.add(newRule);
         return newRule;
@@ -58,8 +82,13 @@ public abstract class SimpleRuleBuilder<T> implements RuleFactory, RuleBuilder {
 
 
     public final RuleCollection build() {
-        internal(object);
-        return new RuleCollectionImpl(rules, failFast, object);
+        try {
+            internal(object);
+            return new DefaultRuleCollection(rules, failFast, object);
+        } catch ( final FailFastException ffe) {
+            final RuleResult result= ffe.getResult();
+            return new FailFastRuleCollection(result);
+        }
     }
 
     public final <P> P getProperty(String path) {
@@ -220,8 +249,6 @@ public abstract class SimpleRuleBuilder<T> implements RuleFactory, RuleBuilder {
             }
         }
         return false;
-
-
     }
 
 

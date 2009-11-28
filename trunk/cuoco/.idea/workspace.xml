@@ -116,10 +116,44 @@
       <file leaf-file-name="SimpleRuleBuilder.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/SimpleRuleBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="201" column="36" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.62439024">
+            <state line="251" column="0" selection-start="7147" selection-end="7147" vertical-scroll-proportion="0.3097561">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FailFastException.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/FailFastException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="13" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FailFastRuleCollection.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/FailFastRuleCollection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="17" selection-start="405" selection-end="405" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1259331492000" expanded="true" signature="676:854" placeholder="{...}" />
+                <marker date="1259331492000" expanded="true" signature="898:943" placeholder="{...}" />
+                <marker date="1259331492000" expanded="true" signature="1000:1185" placeholder="{...}" />
+                <marker date="1259331492000" expanded="false" signature="1061:1081" placeholder="&lt;~&gt;" />
+                <marker date="1259331492000" expanded="true" signature="1242:1304" placeholder="{...}" />
+                <marker date="1259331492000" expanded="true" signature="1346:1390" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RuleResult.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleResult.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,10 +167,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RuleCollectionImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleCollectionImpl.java">
+      <file leaf-file-name="DefaultRuleCollection.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/DefaultRuleCollection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="48" selection-start="2428" selection-end="2428" vertical-scroll-proportion="0.0">
+            <state line="10" column="6" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -147,7 +181,7 @@
       <file leaf-file-name="Rule.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/Rule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="39" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
+            <state line="68" column="19" selection-start="1624" selection-end="1624" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -157,24 +191,6 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleID.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="7" column="11" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RuleBuilder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectAnalyser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/ObjectAnalyser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="37" selection-start="2112" selection-end="2112" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -205,15 +221,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="17" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -266,9 +273,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/mangala/cuoco/RuleCollectionImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/mangala/cuoco/ObjectWalker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/mangala/cuoco/SimpleRuleBuilder.java" />
         <option value="$PROJECT_DIR$/src/test/java/uk/co/mangala/cuoco/RuleCombinedTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/ObjectAnalyser.java" />
@@ -281,6 +285,9 @@
         <option value="$PROJECT_DIR$/src/test/java/org/codehaus/einstein/cuoco/RuleBuilderTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/Rule.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/codehaus/einstein/cuoco/RuleCombinedTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/FailFastRuleCollection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/DefaultRuleCollection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/FailFastException.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/SimpleRuleBuilder.java" />
       </list>
     </option>
@@ -483,6 +490,94 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="cuoco" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cuoco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -816,7 +911,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288948" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
@@ -916,21 +1011,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/ObjectWalker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/ObjectAnalyser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="37" selection-start="2112" selection-end="2112" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="17" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0" />
@@ -969,15 +1049,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleCollectionImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="48" selection-start="2428" selection-end="2428" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="11" selection-start="214" selection-end="214" vertical-scroll-proportion="0.0">
@@ -999,13 +1070,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/Rule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="39" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/codehaus/einstein/cuoco/RuleCombinedTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="68" column="19" selection-start="3674" selection-end="3674" vertical-scroll-proportion="0.0">
@@ -1015,9 +1079,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/Rule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="19" selection-start="1624" selection-end="1624" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/RuleResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/FailFastRuleCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="405" selection-end="405" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1259331492000" expanded="true" signature="676:854" placeholder="{...}" />
+            <marker date="1259331492000" expanded="true" signature="898:943" placeholder="{...}" />
+            <marker date="1259331492000" expanded="true" signature="1000:1185" placeholder="{...}" />
+            <marker date="1259331492000" expanded="false" signature="1061:1081" placeholder="&lt;~&gt;" />
+            <marker date="1259331492000" expanded="true" signature="1242:1304" placeholder="{...}" />
+            <marker date="1259331492000" expanded="true" signature="1346:1390" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/DefaultRuleCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="6" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/FailFastException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/codehaus/einstein/cuoco/SimpleRuleBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="36" selection-start="5606" selection-end="5606" vertical-scroll-proportion="0.62439024">
+        <state line="251" column="0" selection-start="7147" selection-end="7147" vertical-scroll-proportion="0.3097561">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
